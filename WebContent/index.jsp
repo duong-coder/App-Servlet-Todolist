@@ -1,131 +1,100 @@
-<%@page import="com.database.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="ISO-8859-1">
-<title>Trang chu</title>
-<link rel="stylesheet" href="navigator.css">
+<!-- <link rel="stylesheet" href="./css/navigator.css"> -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<title>Home</title>
 <style>
-body {
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
+html, body, header, #review-page {
+	height: 100%;
 }
 
-.navigator {
-	margin: 0px;
+#review-page {
+	background-image:
+		url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
-
-.nav {
-	margin: 0px;
-	padding: 10px;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	background-color: aquamarine;
-	/* overflow: hidden; */
-}
-
-.nav>h3 {
-	margin-left: 10px;
-	/* background-color: violet; */
-}
-
-.nav>div.menu {
-	width: fit-content;
-	display: block;
-	position: relative;
-}
-
-.nav>div.menu>img {
-	display: block;
-	margin-left: 30px;
-	margin-right: 20px;
-	padding: 5px;
-	background-color: #b1b493;
-}
-
-.nav>div.menu:hover>.menu_select {
-	display: block;
-}
-
-.nav #logo-user {
-	background-color: #DDD;
-	width: fit-content;
-	border-radius: 100%;
-}
-
-.nav #logo-user>img {
-	width: 60px;
-	height: 60px;
-	border-radius: 100%;
-}
-
-.menu_select {
-	display: none;
-	margin: 0px;
-	background-color: wheat;
-	width: fit-content;
-	position: absolute;
-	top: 100%;
-	right: 0px;
-}
-
-.menu_select ul {
-	margin: 0px;
-	padding: 10px;
-	list-style: none;
-	background-color: #DDD;
-}
-
-.menu_select li {
-	margin: 0px;
-	margin-bottom: 5px;
-	width: 150px;
-	padding: 10px;
-	background-color: rgb(77, 76, 76);
-}
-
-.menu_select a {
-	display: block;
-	text-decoration: none;
-	color: white;
-}
-
-
 </style>
 </head>
+
 <body>
-	<div class="navigator">
-		<nav class="nav">
-			<div id="logo-user">
-				<img src="https://img.icons8.com/carbon-copy/100/000000/user.png" />
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light  scrolling-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="#"><img
+				src="https://img.icons8.com/carbon-copy/100/000000/user.png"
+				alt="..." class="img-thumbnail" style="width: 50px; height: 50px;"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse  " id="navbarNav">
+				<ul class="navbar-nav mr-auto smooth-scroll">
+					<li class="nav-item active"><a class="nav-link text-info"
+						href="#">Xin chào, Khách</a></li>
+					<li class="nav-item active "><a class="nav-link " href="./home">Home
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item active "><a class="nav-link "
+						href="./todolist">Todo List <span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+
 			</div>
-			<h3>
-				Xin chào,
-				<%
-				try {
-					User user2 = (User) getServletContext().getAttribute("name");
-					out.print(user2.getFullName());
-				} catch (Exception e) {
-					out.print("Khach");
-				}
-			%>
-			</h3>
-			<div class="menu">
-				<img src="https://img.icons8.com/android/24/000000/menu.png" />
-				<div class="menu_select">
-					<ul>
-						<li><a href="./getdangnhap">Dang nhap</a></li>
-						<li><a href="">Xem thong tin</a></li>
-						<li><a href="./getnotes">Xem cac ghi chu</a></li>
-					</ul>
+			<form class="form-inline ml-auto">
+				<a class="btn btn-primary  mr-sm-2 " href="./signin" role="button">Sign in</a> 
+				<a class="btn btn-primary my-2 my-sm-0" href="./signup" role="button">Sign up</a>
+			</form>
+		</div>
+	</nav>
+
+	<div id="review-page" class="container">
+		<div id="intro" class="view">
+
+			<div class="mask rgba-black-strong">
+
+				<div
+					class="container-fluid d-flex align-items-center justify-content-center h-100">
+
+					<div class="row d-flex justify-content-center text-center">
+
+						<div class="col-md-10">
+
+							<!-- Heading -->
+							<h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Welcome
+								to Todolist</h2>
+
+							<!-- Divider -->
+							<hr class="hr-light">
+
+							<!-- Description -->
+							<h4 class="white-text my-4">Create anything you can't
+								remember right here.</h4>
+							<a href=""><button type="button" class="btn btn-info">Start
+									now</button></a>
+
+						</div>
+
+					</div>
+
 				</div>
+
 			</div>
-		</nav>
+
+		</div>
 	</div>
-	<article>aaa</article>
 
 </body>
+
 </html>
