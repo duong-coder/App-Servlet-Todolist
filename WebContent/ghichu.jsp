@@ -1,3 +1,6 @@
+<%@page import="com.todolist.model.User"%>
+<%@page import="com.todolist.model.Todolist"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -52,20 +55,29 @@ html, body, header, #login-background {
 			<div class="collapse navbar-collapse  " id="navbarNav">
 				<ul class="navbar-nav mr-auto smooth-scroll">
 					<li class="nav-item active"><a class="nav-link text-info"
-						href="#">Xin ch√†o, Kh√°ch</a></li>
-					<li class="nav-item active "><a class="nav-link " href="#">Home
+						href="#">Xin ch‡o, 
+							<%
+								User user = (User) getServletContext().getAttribute("user");
+								if(user == null){
+									out.print("Kh·ch.");
+								} else{
+									out.print(user.getFullname());
+								}
+							%></a></li>
+					<li class="nav-item active "><a class="nav-link " href="./home">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active "><a class="nav-link "
-						href="./getnotes">Todo List <span class="sr-only">(current)</span></a>
+						href="./todolists">Todo List <span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 
 			</div>
 			<form class="form-inline ml-auto">
-				<a class="btn btn-primary  mr-sm-2 " href="./getdangnhap"
-					role="button">Sign in</a> <a class="btn btn-primary my-2 my-sm-0"
-					href="#" role="button">Sign up</a>
+				<a class="btn btn-primary  mr-sm-2 " href="./signin"
+					role="button">Sign in</a> 
+				<a class="btn btn-primary my-2 my-sm-0"
+					href="./signup" role="button">Sign up</a>
 			</form>
 		</div>
 	</nav>
@@ -89,14 +101,74 @@ html, body, header, #login-background {
 				</tr>
 			</thead>
 			<tbody>
+					<%	
+						String action = (String) getServletContext().getAttribute("action");
+						if(action == null){
+							action = "./insert";
+						}
+						Todolist todolist = (Todolist) getServletContext().getAttribute("todoEdit");
+						String titleEdit = "", dateEdit = "", contentEdit = "";
+						if(todolist != null){
+							titleEdit = todolist.getTitle();
+							dateEdit = todolist.getDate();
+							contentEdit = todolist.getContent();
+						}
+					 %>
+					<tr>
+						<form action= "<% out.print(action); %>" method="post">
+							<th scope="row">@</th>
+							<td>
+								<div class="md-form">
+									<input type="text" name="title" class="white-text form-control my-2"
+										placeholder="Title" value= "<% out.print(titleEdit);%>">
+								</div>
+							</td>
+							<td>
+								<div class="md-form">
+									<input type="date" name="date" class="white-text form-control my-2"
+										placeholder="Date" value= "<% out.print(dateEdit);%>">
+								</div>
+							</td>
+							<td>
+								<div class="md-form">
+									<input type="text"  name="content" class="white-text form-control my-2"
+										placeholder="Content" value= "<% out.print(contentEdit);%>">
+								</div>
+							</td>
+							<td>
+								<div class="text-center mt-2">
+									<button class="btn btn-indigo btn btn-success w-100" type="submit">Save</button>	
+								</div>
+							</td>
+						</form>
+					</tr>
+				
+			</tbody>
+			<tbody>
+				<%
+					ArrayList<Todolist> todolists = (ArrayList<Todolist>)  getServletContext().getAttribute("todolists");
+					for(Todolist todo:todolists){
+						out.print("<tr>"+
+										"<th>"+ todolists.indexOf(todo) +"</th>" +
+										"<td>"+ todo.getTitle() +"</td>" +
+										"<td>"+ todo.getDate() +"</td>" +
+										"<td>"+ todo.getContent() +"</td>" +
+										"<th> <a class='btn btn-info my-2 my-sm-0' href='./edit?indexTodo="+ todo.getIndex() +"' role='button'>Edit</a>" + 
+												" <a class='btn btn-warning my-2 my-sm-0' href='./delete?indexTodo="+ todo.getIndex() +"' role='button'>Delete</a> </th>" +
+								"</tr>");
+					}
+				%>
 				<tr>
 					<th scope="row">1</th>
 					<td>Test</td>
 					<td>6/4/2020</td>
 					<td>Demo table</td>
-					<td><a class="btn btn-info my-2 my-sm-0" href="#"
-						role="button">Edit</a> <a class="btn btn-warning my-2 my-sm-0"
-						href="#" role="button">Delete</a></td>
+					<td>
+						<a class="btn btn-info my-2 my-sm-0" href="#"
+							role="button">Edit</a> 
+						<a class="btn btn-warning my-2 my-sm-0"
+							href="#" role="button">Delete</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

@@ -1,3 +1,4 @@
+<%@page import="com.todolist.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -54,22 +55,27 @@ html, body, header, #login-background {
 					<li class="nav-item active"><a class="nav-link text-info"
 						href="#">Xin chào, 
 							<%
-								
+								User user = (User) getServletContext().getAttribute("user");
+								if(user == null){
+									out.print("Khách.");
+								} else{
+									out.print(user.getFullname());
+								}
 							%>
 						</a></li>
-					<li class="nav-item active "><a class="nav-link " href="#">Home
+					<li class="nav-item active "><a class="nav-link " href="./home">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active "><a class="nav-link "
-						href="./getnotes">Todo List <span class="sr-only">(current)</span></a>
+						href="./todolists">Todo List <span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 
 			</div>
 			<form class="form-inline ml-auto">
-				<a class="btn btn-primary  mr-sm-2 " href="./getdangnhap"
+				<a class="btn btn-primary  mr-sm-2 " href="./signin"
 					role="button">Sign in</a> <a class="btn btn-primary my-2 my-sm-0"
-					href="#" role="button">Sign up</a>
+					href="./signup" role="button">Sign up</a>
 			</form>
 		</div>
 	</nav>

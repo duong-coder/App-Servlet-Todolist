@@ -1,3 +1,4 @@
+<%@page import="com.todolist.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -42,12 +43,20 @@ html, body, header, #review-page {
 			<div class="collapse navbar-collapse  " id="navbarNav">
 				<ul class="navbar-nav mr-auto smooth-scroll">
 					<li class="nav-item active"><a class="nav-link text-info"
-						href="#">Xin ch√†o, Kh√°ch</a></li>
+						href="#">Xin ch‡o, 
+							<%
+								User user = (User) getServletContext().getAttribute("user");
+								if(user == null){
+									out.print("Kh·ch.");
+								} else{
+									out.print(user.getFullname());
+								}
+							%></a></li>
 					<li class="nav-item active "><a class="nav-link " href="./home">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active "><a class="nav-link "
-						href="./todolist">Todo List <span class="sr-only">(current)</span></a>
+						href="./todolists">Todo List <span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 
@@ -81,7 +90,7 @@ html, body, header, #review-page {
 							<!-- Description -->
 							<h4 class="white-text my-4">Create anything you can't
 								remember right here.</h4>
-							<a href=""><button type="button" class="btn btn-info">Start
+							<a href="./signin"><button type="button" class="btn btn-info">Start
 									now</button></a>
 
 						</div>

@@ -13,13 +13,13 @@ import com.todolist.model.User;
 import com.todolist.service.UserService;
 
 @WebServlet(urlPatterns = {"/signup"})
-public class UserController extends HttpServlet{
+public class UserSignupController extends HttpServlet{
 	private UserService userService = new UserService();
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		String fullname = req.getParameter("yourname");
+		String fullname = req.getParameter("fullname");
 		String genderStr = req.getParameter("gender");
 		boolean gender = true;
 		if(genderStr.equalsIgnoreCase("male")) {
@@ -30,7 +30,7 @@ public class UserController extends HttpServlet{
 		
 		User user = new User(username, password, fullname, gender, email, phone);
 		try {
-			userService.insertUser(user);
+			userService.signupUser(user);
 			resp.sendRedirect("./home");
 		} catch (SQLException e) {
 			resp.sendRedirect("./signup");
